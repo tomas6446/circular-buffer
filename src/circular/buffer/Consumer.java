@@ -11,8 +11,6 @@ import java.io.IOException;
 public class Consumer extends Thread {
     private final CircularBuffer buffer;
     private final BufferedImage processedImage;
-    private int currentX = 0;
-    private int currentY = 0;
 
     public Consumer(CircularBuffer buffer, BufferedImage image) {
         this.buffer = buffer;
@@ -22,8 +20,8 @@ public class Consumer extends Thread {
     @Override
     public void run() {
         try {
-            for (currentY = 0; currentY < processedImage.getHeight(); currentY++) {
-                for (currentX = 0; currentX < processedImage.getWidth(); currentX++) {
+            for (int currentY = 0; currentY < processedImage.getHeight(); currentY++) {
+                for (int currentX = 0; currentX < processedImage.getWidth(); currentX++) {
                     byte pixel = buffer.get();
                     // Invert the color
                     int invertedPixel = ~pixel & 0xFF;
