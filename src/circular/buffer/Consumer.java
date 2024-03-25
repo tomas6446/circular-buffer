@@ -20,12 +20,12 @@ public class Consumer extends Thread {
     @Override
     public void run() {
         try {
-            for (int currentY = 0; currentY < processedImage.getHeight(); currentY++) {
-                for (int currentX = 0; currentX < processedImage.getWidth(); currentX++) {
+            for (int y = 0; y < processedImage.getHeight(); y++) {
+                for (int x = 0; x < processedImage.getWidth(); x++) {
                     byte pixel = buffer.get();
                     // Invert the color
                     int invertedPixel = ~pixel & 0xFF;
-                    processedImage.setRGB(currentX, currentY, invertedPixel);
+                    processedImage.setRGB(x, y, invertedPixel);
                 }
             }
             ImageIO.write(processedImage, "jpg", new File("processed_image.jpg"));
