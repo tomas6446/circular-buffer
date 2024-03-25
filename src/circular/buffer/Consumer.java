@@ -24,7 +24,9 @@ public class Consumer extends Thread {
         try {
             while (true) {
                 byte pixel = buffer.get();
-                processedImage.setRGB(currentX, currentY, pixel);
+                // Invert the color
+                int invertedPixel = ~pixel & 0xFF;
+                processedImage.setRGB(currentX, currentY, invertedPixel);
 
                 // Update the current position
                 currentX++;

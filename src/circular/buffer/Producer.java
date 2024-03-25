@@ -3,7 +3,7 @@ package circular.buffer;
 import java.awt.image.BufferedImage;
 
 /*
- * Producer class that reads an image file and puts its pixels into the buffer.
+ * Producer class that reads an image file and puts its pixels into the buffer
  */
 public class Producer extends Thread {
     private final CircularBuffer buffer;
@@ -20,9 +20,7 @@ public class Producer extends Thread {
             for (int y = 0; y < image.getHeight(); y++) {
                 for (int x = 0; x < image.getWidth(); x++) {
                     int pixel = image.getRGB(x, y);
-                    // Invert the color
-                    int invertedPixel = ~pixel & 0xFF;
-                    buffer.put((byte) invertedPixel);
+                    buffer.put((byte) pixel);
                 }
             }
         } catch (InterruptedException e) {
