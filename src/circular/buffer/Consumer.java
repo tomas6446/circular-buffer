@@ -22,24 +22,15 @@ public class Consumer extends Thread {
     @Override
     public void run() {
         try {
-            while (true) {
-                byte pixel = buffer.get();
-                // Invert the color
-                int invertedPixel = ~pixel & 0xFF;
-                processedImage.setRGB(currentX, currentY, invertedPixel);
-
-                // Update the current position
-                currentX++;
-                if (currentX >= processedImage.getWidth()) {
-                    currentX = 0;
-                    currentY++;
-                }
-
-                if (currentY >= processedImage.getHeight()) {
-                    ImageIO.write(processedImage, "jpg", new File("processed_image.jpg"));
-                    break;
+            for (currentY = 0; currentY < processedImage.getHeight(); currentY++) {
+                for (currentX = 0; currentX < processedImage.getWidth(); currentX++) {
+                    byte pixel = buffer.get();
+                    // Invert the color
+                    int invertedPixel = ~pixel & 0xFF;
+                    processedImage.setRGB(currentX, currentY, invertedPixel);
                 }
             }
+            ImageIO.write(processedImage, "jpg", new File("processed_image.jpg"));
         } catch (InterruptedException | IOException e) {
             e.printStackTrace();
         }
