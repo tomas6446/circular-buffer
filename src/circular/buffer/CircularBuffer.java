@@ -22,7 +22,7 @@ public class CircularBuffer {
             /*
              * The producer thread waits until the consumer thread reads a byte from the buffer.
              */
-            while (count == buffer.length) {
+            while (count >= buffer.length) {
                 out.println("Buferis pilnas, Producer laukia...");
                 lock.wait();
             }
