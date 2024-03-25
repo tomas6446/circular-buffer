@@ -19,6 +19,9 @@ public class CircularBuffer {
      */
     public void put(byte value) throws InterruptedException {
         synchronized (lock) {
+            /*
+             * The producer thread waits until the consumer thread reads a byte from the buffer.
+             */
             while (count == buffer.length) {
                 out.println("Buferis pilnas, Producer laukia...");
                 lock.wait();
@@ -37,6 +40,9 @@ public class CircularBuffer {
      */
     public byte get() throws InterruptedException {
         synchronized (lock) {
+            /*
+             * The consumer thread waits until the producer thread puts a byte into the buffer.
+             */
             while (count == 0) {
                 out.println("Buferis tuščias, Consumer laukia...");
                 lock.wait();
